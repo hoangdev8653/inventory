@@ -14,7 +14,7 @@ const HandoverRecordSchema = new mongoose.Schema({
   representative_a: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   representative_b: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 
-  user_a_signed: { type: Boolean, default: false },
+  user_a_signed: { type: Boolean, default: true },
   user_b_signed: { type: Boolean, default: false },
   representative_a_signed: { type: Boolean, default: false },
   representative_b_signed: { type: Boolean, default: false },
@@ -22,15 +22,18 @@ const HandoverRecordSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: [
-      "Chờ người giao ký",
       "Chờ người nhận ký",
-      "Chờ đại diện bên nhận ký",
+      "Chờ đại diện bên A ký",
+      "Chờ đại diện bên B ký",
       "Hoàn thành",
     ],
-    default: "Chờ người giao ký",
+    default: "Chờ người nhận ký",
   },
-
   note: String,
+  user_a_signed_at: { type: Date, default: null },
+  user_b_signed_at: { type: Date, default: null },
+  representative_a_signed_at: { type: Date, default: null },
+  representative_b_signed_at: { type: Date, default: null },
 });
 
 const HandoverRecordModel = mongoose.model(

@@ -1,11 +1,11 @@
-// import express from "express";
-// import { productController } from "../controllers/handoverRecords.js";
+import express from "express";
+import { handoverItemController } from "../controllers/handoverItems.js";
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.route("/").get(productController.getAllHandoverRecords);
-// router.route("/getById").get(productController.getHandoverRecordById);
-// router.route("/create").post(productController.createHandoverRecord);
-// router.route("/delete").delete(productController.deleteHandoverRecord);
+router.route("/").get(handoverItemController.getAllHandoverItem);
+router.route("/getById").get(handoverItemController.getHandoverItemById);
+router.route("/create").post(handoverItemController.createHandoverItem);
+router.route("/delete").delete(handoverItemController.deleteHandoverItem);
 
-// export default router;
+export default router;

@@ -26,9 +26,9 @@ app.use(limiter);
 
 app.use("/user", routers.user);
 app.use("/department", routers.department);
-// app.use("/product", routers.product);
-// app.use("/handoverItem", routers.handoverItem);
-// app.use("/handoverRecord", routers.handoverRecord);
+app.use("/product", routers.product);
+app.use("/handoverItem", routers.handoverItem);
+app.use("/handoverRecord", routers.handoverRecord);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!!!!");

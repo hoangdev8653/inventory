@@ -9,7 +9,10 @@ const getAllUsers = async () => {
 const getUserById = async (id) => {
   const user = await UserModel.findById(id).populate({
     path: "departmentId",
-    populate: { path: "representativeId" },
+    populate: {
+      path: "representativeId",
+      select: "_id username email",
+    },
   });
   return user;
 };
@@ -63,6 +66,23 @@ const updateDepartment = async (id, { departmentId }) => {
   }
 };
 
+const updateRole = async (userId, { role, id }) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const updated = await UserModel.findByIdAndUpdate(
+      id,
+      { role },
+      { new: true }
+    );
+    return updated;
+  } catch (error) {
+    throw new Error("Update failed: " + error.message);
+  }
+};
+
 const deleteUser = async (id) => {
   const user = await UserModel.findByIdAndDelete(id);
   if (!user) {
@@ -77,5 +97,6 @@ export const userService = {
   updateDepartment,
   register,
   login,
+  updateRole,
   deleteUser,
 };
